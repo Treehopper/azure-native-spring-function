@@ -17,7 +17,7 @@ resource "azurerm_resource_group" "main" {
 }
 
 resource "azurerm_storage_account" "main" {
-  name                     = var.AZ_STORAGE_NAME
+  name                     = var.AZ_STORAGE_NAME #can only consist of lowercase letters and numbers, and must be between 3 and 24 characters long
   resource_group_name      = azurerm_resource_group.main.name
   location                 = azurerm_resource_group.main.location
   account_tier             = "Standard"
