@@ -36,6 +36,14 @@ resource "azurerm_app_service_plan" "main" {
   }
 }
 
+resource "azurerm_application_insights" "main" {
+  name                = "${var.AZ_FUNCTION_NAME_APP}-appinsights"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  retention_in_days   = "30"
+  application_type    = "web"
+}
+
 resource "azurerm_function_app" "main" {
   name                       = var.AZ_FUNCTION_NAME_APP
   location                   = azurerm_resource_group.main.location
@@ -53,4 +61,8 @@ resource "azurerm_function_app" "main" {
   site_config {
     ftps_state = "FtpsOnly"
   }
+  app_settings = {
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = "${azurerm_application_insights.main.instrumentation_key}"
+  }
+
 }
