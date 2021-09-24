@@ -60,6 +60,9 @@ resource "azurerm_function_app" "main" {
   }
   site_config {
     ftps_state = "FtpsOnly"
+    cors {
+      allowed_origins = ["*"]
+    }
   }
   app_settings = {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "${azurerm_application_insights.main.instrumentation_key}"
