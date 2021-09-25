@@ -25,10 +25,6 @@ public class HelloFunction implements Function<Mono<User>, Mono<Greeting>> {
         HttpRequest request = HttpRequest.newBuilder()
               .uri(URI.create("https://rest.ensembl.org/info/ping?content-type=application/json"))
               .build();
-        // client.sendAsync(request, BodyHandlers.ofString())
-        // .thenApply(HttpResponse::body)
-        // .thenAccept(System.out::println)
-        // .join();
 
         HttpResponse<String> response;
         try {
